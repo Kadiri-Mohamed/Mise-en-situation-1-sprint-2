@@ -20,7 +20,6 @@ function updateCount() {
  */
 function filterItemsBySize(maxSize) {
   const items = Array.from(itemList.children);
-
   // TODO: Parcourir les éléments et afficher uniquement ceux
   // dont la longueur du texte est égale ou inférieure à maxSize.
   // Utilisez item.style.display pour gérer l'affichage.
@@ -28,6 +27,18 @@ function filterItemsBySize(maxSize) {
   // Piste pour la boucle : items.forEach(item => { ... });
   
   // Ne pas oublier de mettre à jour le compteur d'éléments visibles
+  if (maxSize > 0) {
+    // items.filter(item => item.textContent.length >= maxSize)
+    itemList.innerHTML = ""
+    for (let item of items) {
+      if(item.textContent.length <= maxSize){
+        itemList.appendChild(item);
+        console.log(item.textContent)
+      }
+    }
+    // console.log(maxSize)
+  }
+
   updateCount();
 }
 
@@ -36,10 +47,14 @@ function filterItemsBySize(maxSize) {
  */
 function sortItemsAlphabetically() {
   const items = Array.from(itemList.children);
-
+  itemList.innerHTML = ""
   // TODO: Filtrer les éléments visibles, les trier par ordre alphabétique
   // avec localeCompare, puis les réinsérer dans itemList dans l'ordre.
-  
+  items.sort((a, b) => a.textContent.localeCompare(b.textContent));
+  for (let item of items) {
+    itemList.appendChild(item);
+  }
+  updateCount();
 }
 
 /**
